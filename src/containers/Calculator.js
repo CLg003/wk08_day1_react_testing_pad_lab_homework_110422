@@ -10,12 +10,12 @@ function App() {
   const [newTotal, setNewTotal] = useState(true); 
 
   const numberClick =  (number) => {
-    
     let tempTotal = runningTotal;
+
     if ( runningTotal === 0 || newTotal){
-      setPreviousTotal(runningTotal)
-      tempTotal = 0
-      setNewTotal(false);
+    setPreviousTotal(runningTotal)
+    tempTotal = 0
+    setNewTotal(false);
     }
 
     setRunningTotal(parseFloat("" + tempTotal + number));
@@ -77,11 +77,19 @@ function App() {
   }
 
   const multiply = (number) => {
-    setRunningTotal(parseFloat(previousTotal) * parseFloat(number));
+    if (parseFloat(previousTotal) === 0) {
+      setRunningTotal(0);
+    } else {
+      setRunningTotal(parseFloat(previousTotal) * parseFloat(number));
+    }
   }
 
   const divide = (number) => {
-    setRunningTotal(parseFloat(previousTotal) / parseFloat(number));
+    if (parseFloat(number) === 0) {
+      setRunningTotal('Error, cannot divide by 0!');
+    } else {
+      setRunningTotal(parseFloat(previousTotal) / parseFloat(number));
+    }
   }
 
 

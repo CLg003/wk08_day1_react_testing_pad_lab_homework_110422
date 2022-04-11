@@ -85,6 +85,32 @@ describe("Calculator", () => {
   });
 
   // What does the code do in exceptional circumstances? Specifically, if you divide by zero, what is the effect? Write a test to describe what you'd prefer to happen, and then correct the code to make that test pass (you will need to modify the Calculator model to meet this requirement).
+  // Test for dividing by 0:
+  it('should display an error message if user attempts to divide by 0', () => {
+    cy.get('#number3').click();
+    cy.get('#operator-divide').click();
+    cy.get('#number0').click();
+    cy.get('#operator-equals').click();
+    cy.get('.display').should('contain', 'Error, cannot divide by 0!');
+  });
+
+  // Test for multiplying by 0 - 0 entered last:
+  it('should always return 0 as the result of multipy by 0 (0 entered last)', () => {
+    cy.get('#number3').click();
+    cy.get('#operator-multiply').click();
+    cy.get('#number0').click();
+    cy.get('#operator-equals').click();
+    cy.get('.display').should('contain', '0');
+  });
+
+  // Test for multiplying by 0 - 0 entered first:
+  xit('should always return 0 as the result of multipy by 0 (0 entered first)', () => {
+    cy.get('#number0').click();
+    cy.get('#operator-multiply').click();
+    cy.get('#number3').click();
+    cy.get('#operator-equals').click();
+    cy.get('.display').should('contain', '0');
+  });
 
 });
 
